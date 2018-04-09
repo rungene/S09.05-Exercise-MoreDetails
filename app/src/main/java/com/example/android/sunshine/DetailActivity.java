@@ -55,6 +55,13 @@ public class DetailActivity extends AppCompatActivity {
 //      TODO (12) Remove mWeatherDisplay TextView
        // mWeatherDisplay = (TextView) findViewById(R.id.tv_display_weather);
 //      TODO (13) Find each of the TextViews by ID
+        mDate = (TextView) findViewById(R.id.tv_display_date);
+        mDesc = (TextView) findViewById(R.id.tv_display_desc);
+        mHigh = (TextView) findViewById(R.id.tv_display_weather);
+        mLow = (TextView) findViewById(R.id.tv_display_low_temp);
+        mHumid = (TextView) findViewById(R.id.tv_display_humid);
+        mWind = (TextView) findViewById(R.id.tv_display_wind);
+        mPressure = (TextView) findViewById(R.id.tv_display_pressure);
 
 //      TODO (14) Remove the code that checks for extra text
         Intent intentThatStartedThisActivity = getIntent();
