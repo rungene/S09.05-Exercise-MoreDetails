@@ -16,6 +16,7 @@
 package com.example.android.sunshine;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.android.sunshine.data.WeatherContract;
 
 public class DetailActivity extends AppCompatActivity {
 //      TODO (21) Implement LoaderManager.LoaderCallbacks<Cursor>
@@ -34,6 +37,22 @@ public class DetailActivity extends AppCompatActivity {
     private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
 
 //  TODO (18) Create a String array containing the names of the desired data columns from our ContentProvider
+     /*
+     * The columns of data that we are interested in displaying within our DetailActivity's
+     * weather display.
+     */
+     public static final String[] WEATHER_DETAIL_PROJECTION = {
+
+        WeatherContract.WeatherEntry.COLUMN_DATE,
+        WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+        WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+        WeatherContract.WeatherEntry.COLUMN_HUMIDITY,
+        WeatherContract.WeatherEntry.COLUMN_PRESSURE,
+        WeatherContract.WeatherEntry.COLUMN_WIND_SPEED,
+        WeatherContract.WeatherEntry.COLUMN_DEGREES,
+        WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
+};
+
 //  TODO (19) Create constant int values representing each column name's position above
 //  TODO (20) Create a constant int to identify our loader used in DetailActivity
 
@@ -41,6 +60,7 @@ public class DetailActivity extends AppCompatActivity {
     private String mForecastSummary;
 
 //  TODO (15) Declare a private Uri field called mUri
+    private Uri mUri;
 
 //  TODO (10) Remove the mWeatherDisplay TextView declaration
    // private TextView mWeatherDisplay;
@@ -64,6 +84,7 @@ public class DetailActivity extends AppCompatActivity {
         mPressure = (TextView) findViewById(R.id.tv_display_pressure);
 
 //      TODO (14) Remove the code that checks for extra text
+/*
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity != null) {
             if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
@@ -71,8 +92,15 @@ public class DetailActivity extends AppCompatActivity {
               //  mWeatherDisplay.setText(mForecastSummary);
             }
         }
+*/
+
 //      TODO (16) Use getData to get a reference to the URI passed with this Activity's Intent
+        mUri = getIntent().getData();
+
 //      TODO (17) Throw a NullPointerException if that URI is null
+        if (mUri==null)
+            throw new NullPointerException("URI for Detailactivity can not be null");
+
 //      TODO (35) Initialize the loader for DetailActivity
     }
 
