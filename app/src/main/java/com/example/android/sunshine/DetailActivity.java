@@ -54,6 +54,20 @@ public class DetailActivity extends AppCompatActivity {
 };
 
 //  TODO (19) Create constant int values representing each column name's position above
+      /*
+     * We store the indices of the values in the array of Strings above to more quickly be able
+     * to access the data from our query. If the order of the Strings above changes, these
+     * indices must be adjusted to match the order of the Strings.
+     */
+public static final int INDEX_WEATHER_DATE = 0;
+    public static final int INDEX_WEATHER_MAX_TEMP = 1;
+    public static final int INDEX_WEATHER_MIN_TEMP = 2;
+    public static final int INDEX_WEATHER_HUMIDITY = 3;
+    public static final int INDEX_WEATHER_PRESSURE = 4;
+    public static final int INDEX_WEATHER_WIND_SPEED = 5;
+    public static final int INDEX_WEATHER_DEGREES = 6;
+    public static final int INDEX_WEATHER_CONDITION_ID = 7;
+
 //  TODO (20) Create a constant int to identify our loader used in DetailActivity
 
     /* A summary of the forecast that can be shared by clicking the share button in the ActionBar */
@@ -77,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
 //      TODO (13) Find each of the TextViews by ID
         mDate = (TextView) findViewById(R.id.tv_display_date);
         mDesc = (TextView) findViewById(R.id.tv_display_desc);
-        mHigh = (TextView) findViewById(R.id.tv_display_weather);
+        mHigh = (TextView) findViewById(R.id.tv_display_high_temp);
         mLow = (TextView) findViewById(R.id.tv_display_low_temp);
         mHumid = (TextView) findViewById(R.id.tv_display_humid);
         mWind = (TextView) findViewById(R.id.tv_display_wind);
