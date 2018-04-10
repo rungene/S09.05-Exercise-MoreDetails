@@ -143,6 +143,7 @@ public static final int INDEX_WEATHER_DATE = 0;
      * Callback invoked when a menu item was selected from this Activity's menu. Android will
      * automatically handle clicks on the "up" button for us so long as we have specified
      * DetailActivity's parent Activity in the AndroidManifest.
+     * 
      *
      * @param item The menu item that was selected by the user
      *
