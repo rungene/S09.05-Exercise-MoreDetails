@@ -250,8 +250,9 @@ public static final int INDEX_WEATHER_DATE = 0;
         String description = SunshineWeatherUtils.getStringForWeatherCondition(this, weatherId);
 
         /* Set the text */
-        
+
         mDesc.setText(description);
+        
     }
 
     @Override
