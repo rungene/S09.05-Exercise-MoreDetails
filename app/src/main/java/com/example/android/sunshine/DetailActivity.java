@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
+import com.example.android.sunshine.utilities.SunshineWeatherUtils;
 
 public class DetailActivity extends AppCompatActivity
 implements LoaderManager.LoaderCallbacks<Cursor>
@@ -243,6 +244,13 @@ public static final int INDEX_WEATHER_DATE = 0;
       String dateText = SunshineDateUtils.getFriendlyDateString(this,localDateMidnightGmt,true);
       mDate.setText(dateText);
 
+        /* Read weather condition ID from the cursor (ID provided by Open Weather Map) */
+        int weatherId = data.getInt(INDEX_WEATHER_CONDITION_ID);
+        /* Use the weatherId to obtain the proper description */
+        String description = SunshineWeatherUtils.getStringForWeatherCondition(this, weatherId);
+
+        /* Set the text */
+        mDesc.setText(description);
     }
 
     @Override
