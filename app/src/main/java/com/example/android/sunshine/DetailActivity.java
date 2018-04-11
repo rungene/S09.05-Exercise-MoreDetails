@@ -16,9 +16,13 @@
 package com.example.android.sunshine;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,8 +30,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.android.sunshine.data.WeatherContract;
+import com.example.android.sunshine.utilities.SunshineDateUtils;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity
+implements LoaderManager.LoaderCallbacks<Cursor>
+{
 //      TODO (21) Implement LoaderManager.LoaderCallbacks<Cursor>
 
     /*
@@ -69,6 +76,7 @@ public static final int INDEX_WEATHER_DATE = 0;
     public static final int INDEX_WEATHER_CONDITION_ID = 7;
 
 //  TODO (20) Create a constant int to identify our loader used in DetailActivity
+    private static final int ID_DETAIL_LOADER =353;
 
     /* A summary of the forecast that can be shared by clicking the share button in the ActionBar */
     private String mForecastSummary;
@@ -143,7 +151,7 @@ public static final int INDEX_WEATHER_DATE = 0;
      * Callback invoked when a menu item was selected from this Activity's menu. Android will
      * automatically handle clicks on the "up" button for us so long as we have specified
      * DetailActivity's parent Activity in the AndroidManifest.
-     * 
+     *
      *
      * @param item The menu item that was selected by the user
      *
@@ -187,12 +195,69 @@ public static final int INDEX_WEATHER_DATE = 0;
         return shareIntent;
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle args) {
+
+        switch (loaderId){
+
+            case ID_DETAIL_LOADER:
+                return new CursorLoader(this,
+                        mUri,
+
+                        WEATHER_DETAIL_PROJECTION,
+                        null,
+                        null,
+                        null
+                        );
+                default:
+                    throw new RuntimeException("Loader not implemented: "+loaderId);
+
+        }
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+           /*
+         * Before we bind the data to the UI that will display that data, we need to check the
+         * cursor to make sure we have the results that we are expecting. In order to do that, we
+         * check to make sure the cursor is not null and then we call moveToFirst on the cursor.
+         * Although it may not seem obvious at first, moveToFirst will return true if it contains
+         * a valid first row of data.
+         *
+         * If we have valid data, we want to continue on to bind that data to the UI. If we don't
+         * have any data to bind, we just return from this method.
+         */
+
+      boolean cursorHasValidData = false;
+      if (data != null && data.moveToFirst()){
+          //we have valid data,continue on to bind the data to the ui
+          cursorHasValidData = true;
+
+      }
+      if (!cursorHasValidData){
+          //no data to display, simply return and do nothing
+          return;
+      }
+        long localDateMidnightGmt = data.getLong(INDEX_WEATHER_DATE);
+      String dateText = SunshineDateUtils.getFriendlyDateString(this,localDateMidnightGmt,true);
+      mDate.setText(dateText);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
 //  TODO (22) Override onCreateLoader
 //          TODO (23) If the loader requested is our detail loader, return the appropriate CursorLoader
 
 //  TODO (24) Override onLoadFinished
 //      TODO (25) Check before doing anything that the Cursor has valid data
 //      TODO (26) Display a readable data string
+
+
 //      TODO (27) Display the weather description (using SunshineWeatherUtils)
 //      TODO (28) Display the high temperature
 //      TODO (29) Display the low temperature
