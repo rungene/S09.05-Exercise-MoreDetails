@@ -284,6 +284,14 @@ public static final int INDEX_WEATHER_DATE = 0;
 
         mHumid.setText(humidityString);
 
+        //display the wind speed and direction
+        //Read wind speed (in MPH)and direction (in compass degrees ) from the cursor
+        float windSpeed = data.getFloat(INDEX_WEATHER_WIND_SPEED);
+        float windDirection = data.getFloat(INDEX_WEATHER_DEGREES);
+        String windString = SunshineWeatherUtils.getFormattedWind(this,windSpeed,windDirection);
+
+        //set text
+        mWind.setText(windString);
 
 
 
