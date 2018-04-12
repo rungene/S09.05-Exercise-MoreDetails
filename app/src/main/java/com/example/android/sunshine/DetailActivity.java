@@ -252,7 +252,19 @@ public static final int INDEX_WEATHER_DATE = 0;
         /* Set the text */
 
         mDesc.setText(description);
-        
+        //display the high temperature
+        //max temperature.
+        double highInCelsius = data.getDouble(INDEX_WEATHER_MAX_TEMP);
+            /*
+         * If the user's preference for weather is fahrenheit, formatTemperature will convert
+         * the temperature. This method will also append either °C or °F to the temperature
+         * String.
+         */
+            String highString = SunshineWeatherUtils.formatTemperature(this,highInCelsius);
+
+            //set the text
+        mHigh.setText(highString);
+
     }
 
     @Override
