@@ -265,6 +265,8 @@ public static final int INDEX_WEATHER_DATE = 0;
             //set the text
         mHigh.setText(highString);
 
+
+
     }
 
     @Override
