@@ -265,6 +265,26 @@ public static final int INDEX_WEATHER_DATE = 0;
             //set the text
         mHigh.setText(highString);
 
+        //display the low temperature
+        double lowInCelsius = data.getDouble(INDEX_WEATHER_MIN_TEMP);
+            /*
+         * If the user's preference for weather is fahrenheit, formatTemperature will convert
+         * the temperature. This method will also append either °C or °F to the temperature
+         * String.
+         */
+
+        String lowTemperature = SunshineWeatherUtils.formatTemperature(this,lowInCelsius);
+        //set text
+        mLow.setText(lowTemperature);
+//display humidity
+        float humidity = data.getFloat(INDEX_WEATHER_HUMIDITY);
+        String humidityString = getString(R.string.format_humidity,humidity);
+
+        //set text
+
+        mHumid.setText(humidityString);
+
+
 
 
     }
