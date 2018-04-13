@@ -293,6 +293,29 @@ public static final int INDEX_WEATHER_DATE = 0;
         //set text
         mWind.setText(windString);
 
+        //display pressure
+        //read pressure from the cursor
+        float pressure = data.getFloat(INDEX_WEATHER_PRESSURE);
+          /*
+         * Format the pressure text using string resources. The reason we directly access
+         * resources using getString rather than using a method from SunshineWeatherUtils as
+         * we have for other data displayed in this Activity is because there is no
+         * additional logic that needs to be considered in order to properly display the
+         * pressure.
+         */
+          String pressureString = getString(R.string.format_pressure,pressure);
+
+          //set text
+        mPressure.setText(pressureString);
+
+        //store a forecast summary in mForecast
+        mForecastSummary = String.format("%s-%s-%s",
+                dateText,description,highString,lowTemperature
+                );
+
+
+
+
 
 
     }
