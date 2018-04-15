@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onClick(long date) {
+        
 //      TODO (39) Refactor onClick to build a URI for the clicked date and and pass it with the Intent using setData
      /*   Context context = this;
         Class destinationClass = DetailActivity.class;
