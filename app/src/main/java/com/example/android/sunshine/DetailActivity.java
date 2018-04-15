@@ -125,6 +125,7 @@ public static final int INDEX_WEATHER_DATE = 0;
             throw new NullPointerException("URI for Detailactivity can not be null");
 
 //      TODO (35) Initialize the loader for DetailActivity
+        getSupportLoaderManager().initLoader(ID_DETAIL_LOADER,null,this);
     }
 
     /**
